@@ -19,7 +19,7 @@ export default function QuestionsList() {
         title="Повестка дня"
       />
 
-      <div className="relative pb-12">
+      <div className="relative pb-12 sm:w-192 mx-auto">
         {
           theList.map((listItem, listItemIndex) => {
             return <div key={ listItemIndex }>

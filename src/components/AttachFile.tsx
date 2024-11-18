@@ -20,7 +20,7 @@ export default function AttachFile(props: { className: string }) {
       Приложить файл
     </ListButton>
     <Sheet
-      className="pb-safe"
+      className="pb-safe w-full sm:w-auto"
       opened={sheetOpened}
       onBackdropClick={() => setSheetOpened(false)}
     >

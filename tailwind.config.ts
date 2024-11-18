@@ -10,6 +10,10 @@ export default konstaConfig({
   darkMode: 'media',
   theme: {
     extend: {
+      spacing: {
+        '128': '32rem',
+        '192': '48rem'
+      },
       colors: {
         background: "var(--background)",
         foreground: "var(--foreground)",
