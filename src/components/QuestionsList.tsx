@@ -2,6 +2,8 @@
 
 import { useState } from 'react'
 import {
+  Block,
+  Button,
   Fab,
   Navbar,
   Page
@@ -13,6 +15,9 @@ import QueestionsItem from './QuestionsItem'
 
 export default function QuestionsList() {
   const [ theList, setTheList ] = useState<string[]>(['', '', ''])
+  const onGenerate = () => {
+    
+  }
   return (
     <Page>
       <Navbar
@@ -49,6 +54,11 @@ export default function QuestionsList() {
           }}
         />
       </div>
+      <Block strong outlineIos className="space-y-2">
+        <Button onClick={() => {
+          onGenerate()
+        }}>Сгенерировать бюллетень</Button>
+      </Block>
     </Page>
   )
 }
