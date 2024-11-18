@@ -10,6 +10,8 @@ import {
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
 import { faEllipsisVertical } from '@fortawesome/free-solid-svg-icons'
 
+import AttachFile from './AttachFile'
+
 export type QuestionProps = {
   content: string
   number: number
@@ -32,15 +34,16 @@ return <div>
     >
       <List>
         <ListInput
+          className="z-10"
           placeholder="Введите вопрос"
           type="text"
           onInput={(e) => {
             props.onSetContent(e.target.value)
           }}
         />
-        <ListButton className="mx-4">
-          Приложить файл
-        </ListButton>
+        <AttachFile
+          className="z-30"
+        />
       </List>
     </Block>
   </div>
