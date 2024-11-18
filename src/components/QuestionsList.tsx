@@ -10,7 +10,9 @@ import {
   ListInput,
   Navbar,
   Page
-} from 'konsta/react';
+} from 'konsta/react'
+import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
+import { faEllipsisVertical } from '@fortawesome/free-solid-svg-icons'
 
 export default function QuestionsList() {
   const [ theList, setTheList ] = useState<string[]>(['', '', ''])
@@ -22,9 +24,16 @@ export default function QuestionsList() {
 
       {
         theList.map((listItem, listItemIndex) => {
-          return <>
-            <BlockTitle className="ml-4">
-              Вопрос №{listItemIndex + 1}
+          return <div key={ listItemIndex }>
+            <BlockTitle className="mx-4">
+              <div>
+                Вопрос №{listItemIndex + 1}
+              </div>
+              <div className="flex-1">
+              </div>
+              <div className="cursor-pointer px-2">
+                <FontAwesomeIcon icon={ faEllipsisVertical } />
+              </div>
             </BlockTitle>
             <Block
               key={ listItemIndex }
@@ -39,7 +48,7 @@ export default function QuestionsList() {
                 </ListButton>
               </List>
             </Block>
-          </>
+          </div>
         })
       }
       <Block strong outlineIos className="space-y-2">
