@@ -29,6 +29,9 @@ export default function QuestionsList() {
                   content: listItem,
                   onSetContent: (content: string) => {
                     setTheList(theList.map((i, index) => index === listItemIndex ? content: i))
+                  },
+                  onDelete: () => {
+                    setTheList(theList.filter((_, index) => index !== listItemIndex))
                   }
                 })
               }
