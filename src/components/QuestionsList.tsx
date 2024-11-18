@@ -16,7 +16,7 @@ import QueestionsItem from './QuestionsItem'
 export default function QuestionsList() {
   const [ theList, setTheList ] = useState<string[]>(['', '', ''])
   const onGenerate = () => {
-    
+
   }
   return (
     <Page>
@@ -55,9 +55,22 @@ export default function QuestionsList() {
         />
       </div>
       <Block strong outlineIos className="space-y-2">
-        <Button onClick={() => {
-          onGenerate()
-        }}>Сгенерировать бюллетень</Button>
+        <form method="post" action="/api/docx">
+          {
+            theList.map((listItem, listItemIndex) => {
+              return <input
+                key={ listItemIndex }
+                type="hidden"
+                name="question[]"
+                value={ listItem }
+              />
+            })
+          }
+          <Button
+          >
+            Сгенерировать бюллетень
+          </Button>
+        </form>
       </Block>
     </Page>
   )

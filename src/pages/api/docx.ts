@@ -24,7 +24,7 @@ import {
   convertInchesToTwip
 } from "docx"
 import { NextApiRequest, NextApiResponse } from 'next'
-
+import multiparty from 'multiparty'
 
 export const createDocx = async function (questions: string[]): Promise<Buffer | null> {
   const word = new Document({
@@ -57,6 +57,7 @@ export const createDocx = async function (questions: string[]): Promise<Buffer |
             },
             rows: [
               new TableRow({
+                tableHeader: true,
                 children: [
                   new TableCell({
                     children: [new Paragraph('№')]
@@ -74,6 +75,28 @@ export const createDocx = async function (questions: string[]): Promise<Buffer |
                     children: [new Paragraph('Воздержался')]
                   })
                 ]
+              }),
+              ...questions.map((questionItem, questionItemIndex) => {
+                return new TableRow({
+                  tableHeader: true,
+                  children: [
+                    new TableCell({
+                      children: [new Paragraph(String(questionItemIndex + 1))]
+                    }),
+                    new TableCell({
+                      children: [new Paragraph(questionItem)]
+                    }),
+                    new TableCell({
+                      children: [new Paragraph('')]
+                    }),
+                    new TableCell({
+                      children: [new Paragraph('')]
+                    }),
+                    new TableCell({
+                      children: [new Paragraph('')]
+                    })
+                  ]
+                })
               })
             ]
           })
@@ -89,7 +112,7 @@ export const createDocx = async function (questions: string[]): Promise<Buffer |
 
 export default async function handler(req: NextApiRequest, res: NextApiResponse) {
 
-  const result = await createDocx([])
+  const result = await createDocx(req.body['question[]'])
   if (result) {
     res.status(200).setHeader('Content-Type', 'application/vnd.openxmlformats-officedocument.wordprocessingml.document').send(result)
   } else {
