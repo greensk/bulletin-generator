@@ -3,12 +3,11 @@
 import { useState } from 'react'
 import {
   Block,
+  BlockTitle,
   Button,
-  Icon,
-  Card,
   List,
+  ListButton,
   ListInput,
-  ListItem,
   Navbar,
   Page
 } from 'konsta/react';
@@ -23,17 +22,24 @@ export default function QuestionsList() {
 
       {
         theList.map((listItem, listItemIndex) => {
-          return <Block
-            key={ listItemIndex }
-          >
-            <List title={ `Вопрос №${listItemIndex + 1}` }>
-              <ListInput
-                media={<Icon> {listItemIndex + 1} </Icon>}
-                placeholder="Введите вопрос"
-                type="text"
-              />
-            </List>
-          </Block>
+          return <>
+            <BlockTitle className="ml-4">
+              Вопрос №{listItemIndex + 1}
+            </BlockTitle>
+            <Block
+              key={ listItemIndex }
+            >
+              <List>
+                <ListInput
+                  placeholder="Введите вопрос"
+                  type="text"
+                />
+                <ListButton className="mx-4">
+                  Приложить файл
+                </ListButton>
+              </List>
+            </Block>
+          </>
         })
       }
       <Block strong outlineIos className="space-y-2">
