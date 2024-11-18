@@ -37,9 +37,9 @@ return <div>
     >
       <List>
         <ListInput
-          className="z-10"
           placeholder="Введите вопрос"
-          type="text"
+          type="textarea"
+          inputClassName="!h-20 resize-none"
           onInput={(e) => {
             props.onSetContent(e.target.value)
           }}
