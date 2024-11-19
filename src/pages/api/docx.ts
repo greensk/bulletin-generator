@@ -7,7 +7,7 @@ import {
   TableRow,
   WidthType,
   convertMillimetersToTwip
-} from "docx"
+} from 'docx'
 import { NextApiRequest, NextApiResponse } from 'next'
 
 export const createDocx = async function (questions: string[]): Promise<Buffer | null> {
