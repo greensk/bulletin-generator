@@ -2,6 +2,7 @@
   "extends": ["next/core-web-vitals", "next/typescript"],
   "rules": {
     "semi": ["error", "never"],
-    "indent": ["error", 2]
+    "indent": ["error", 2],
+    "eol-last": ["error", "always"]
   }
 }
