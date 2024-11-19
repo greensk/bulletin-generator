@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React, { useState } from 'react'
 import {
   Block,
   Button,
@@ -6,7 +6,7 @@ import {
   ListButton,
   Sheet,
   Toolbar
-} from 'konsta/react';
+} from 'konsta/react'
 
 export default function AttachFile(props: { className: string }) {
   const [sheetOpened, setSheetOpened] = useState(false)

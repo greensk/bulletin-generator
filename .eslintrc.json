@@ -1,7 +1,7 @@
 {
   "extends": ["next/core-web-vitals", "next/typescript"],
   "rules": {
-    "semi": "off",
+    "semi": ["error", "never"],
     "indent": ["error", 2]
   }
 }
