@@ -55,6 +55,7 @@ export const createDocx = async function (questions: string[]): Promise<Buffer |
               size: 100,
               type: WidthType.PERCENTAGE
             },
+            columnWidths: [5, 65, 10, 10, 10],
             rows: [
               new TableRow({
                 tableHeader: true,
@@ -78,7 +79,6 @@ export const createDocx = async function (questions: string[]): Promise<Buffer |
               }),
               ...questions.map((questionItem, questionItemIndex) => {
                 return new TableRow({
-                  tableHeader: true,
                   children: [
                     new TableCell({
                       children: [new Paragraph(String(questionItemIndex + 1))]
