@@ -18,7 +18,7 @@ export type QuestionProps = {
 }
 
 export default function QuestionItem(props: QuestionProps) {
-return <div>
+  return <div>
     <BlockTitle className="mx-4">
       <div>
         Вопрос №{ props.number }
