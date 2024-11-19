@@ -13,7 +13,7 @@ import QuestionMenu from './QuestionMenu'
 export type QuestionProps = {
   content: string
   number: number
-  onDelete: Function
+  onDelete: () => void
   onSetContent: (content: string) => void
 }
 

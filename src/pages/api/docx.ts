@@ -1,30 +1,14 @@
 import {
-  AlignmentType,
-  BorderStyle,
-  ColumnBreak,
   Document,
-  FileChild,
-  Footer,
-  HeadingLevel,
-  LevelFormat,
   Packer,
-  PageBreak,
-  PageNumber,
   Paragraph,
-  ParagraphChild,
-  SectionType,
-  TabStopPosition,
-  TabStopType,
   Table,
   TableCell,
   TableRow,
-  TextRun,
   WidthType,
-  convertMillimetersToTwip,
-  convertInchesToTwip
+  convertMillimetersToTwip
 } from "docx"
 import { NextApiRequest, NextApiResponse } from 'next'
-import multiparty from 'multiparty'
 
 export const createDocx = async function (questions: string[]): Promise<Buffer | null> {
   const word = new Document({

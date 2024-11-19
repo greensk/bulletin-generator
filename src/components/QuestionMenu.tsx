@@ -11,7 +11,7 @@ import { faEllipsisVertical } from '@fortawesome/free-solid-svg-icons'
 import { useState, useRef } from 'react'
 
 export type QuestionMenuProps = {
-  delete: Function
+  delete: () => void
 }
 
 export default function QuestionMenu(props: QuestionMenuProps) {

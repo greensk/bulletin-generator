@@ -15,9 +15,6 @@ import QueestionsItem from './QuestionsItem'
 
 export default function QuestionsList() {
   const [ theList, setTheList ] = useState<string[]>(['', '', ''])
-  const onGenerate = () => {
-
-  }
   return (
     <Page>
       <Navbar
