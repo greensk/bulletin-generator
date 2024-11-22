@@ -139,7 +139,7 @@ export default function GeneralForm(props: GeneralFormProps) {
       </> : <></>  
     }
 
-{
+    {
       props.meeting.meetingType !== 'public' ? <>
         <BlockTitle>
           Заочная часть
