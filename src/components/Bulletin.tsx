@@ -17,7 +17,16 @@ export default function Bulleting() {
       street: '',
       house: ''
     },
-    initiators: [],
+    initiatorType: 'owners',
+    initiatorOrganization: {
+      name: ''
+    },
+    initiatorOwners: [
+      {
+        fullName: '',
+        flat: ''
+      }
+    ],
     questions: [
       {
         text: '',

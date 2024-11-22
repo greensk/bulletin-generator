@@ -31,9 +31,22 @@ export type Question = {
   id: string
 }
 
+export type InitiatorType = 'owners' | 'management'
+
+export type InitiatorPerson = {
+  fullName: string
+  flat: string
+}
+
+export type InitiatorOrganization = {
+  name: string
+}
+
 export type Meeting = {
   address: Address
-  initiators: Organization | Array<Person>
+  initiatorType: InitiatorType
+  initiatorOwners: Array<InitiatorPerson>
+  initiatorOrganization: InitiatorOrganization
   questions: Array<Question>
   meetingType: MeetingType
   public: PublicMeeting
