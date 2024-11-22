@@ -1,7 +1,6 @@
 'use client'
 
 import {
-  useState,
   Dispatch,
   SetStateAction
 } from 'react'
@@ -26,7 +25,6 @@ type QuestionsListProps = {
 }
 
 export default function QuestionsList(props: QuestionsListProps) {
-  // const [ theList, setTheList ] = useState<string[]>(['', '', ''])
   const setListItemText = (index: number, text: string) => {
     props.setMeeting((meeting) => {
       return Object.assign(
