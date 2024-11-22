@@ -1,7 +1,7 @@
 'use client'
 
-import QuestionsList from './QuestionsList'
-import GeneralForm from './GeneralForm'
+import QuestionsList from './Bulletin/QuestionsList'
+import GeneralForm from './Bulletin/GeneralForm'
 
 import { Meeting } from '../types'
 

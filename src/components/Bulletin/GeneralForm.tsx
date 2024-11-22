@@ -11,7 +11,7 @@ import {
   Page,
   Radio
 } from 'konsta/react'
-import { Meeting } from '../types'
+import { Meeting } from '@/types'
 import {
   Dispatch,
   SetStateAction
@@ -22,8 +22,6 @@ type GeneralFormProps = {
   meeting: Meeting
   setMeeting: Dispatch<SetStateAction<Meeting>>
 }
-
-type MeetingType = 'intramural' | 'distant' | 'combined'
 
 export default function GeneralForm(props: GeneralFormProps) {
   return <Page>
@@ -97,7 +95,7 @@ export default function GeneralForm(props: GeneralFormProps) {
             component="div"
             value="public"
             checked={props.meeting.meetingType === 'public'}
-            onChange={e => props.setMeeting( Object.assign({}, props.meeting, { meetingType: 'public' }) )}
+            onChange={() => props.setMeeting( Object.assign({}, props.meeting, { meetingType: 'public' }) )}
           />
         }
       />
@@ -109,7 +107,7 @@ export default function GeneralForm(props: GeneralFormProps) {
             component="div"
             value="distant"
             checked={props.meeting.meetingType === 'distant'}
-            onChange={e => props.setMeeting( Object.assign({}, props.meeting, { meetingType: 'distant' }) )}
+            onChange={() => props.setMeeting( Object.assign({}, props.meeting, { meetingType: 'distant' }) )}
           />
         }
       />
@@ -121,7 +119,7 @@ export default function GeneralForm(props: GeneralFormProps) {
             component="div"
             value="combined"
             checked={props.meeting.meetingType === 'combined'}
-            onChange={e => props.setMeeting( Object.assign({}, props.meeting, { meetingType: 'combined' }) )}
+            onChange={() => props.setMeeting( Object.assign({}, props.meeting, { meetingType: 'combined' }) )}
           />
         }
       />
