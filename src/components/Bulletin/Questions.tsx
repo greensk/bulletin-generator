@@ -45,13 +45,13 @@ export default function QuestionsList(props: QuestionsListProps) {
       )
     })
   }
-  const removeListItem = (index: number) => {
+  const removeListItem = (idToRemove: string) => {
     props.setMeeting((meeting) => {
       return Object.assign(
         {},
         meeting,
         {
-          questions: meeting.questions.filter((q, i) => i === index)
+          questions: meeting.questions.filter(({ id }) => id !== idToRemove)
         }
       )
     })
@@ -95,7 +95,7 @@ export default function QuestionsList(props: QuestionsListProps) {
                     setListItemText(listItemIndex, content)
                   },
                   onDelete: () => {
-                    removeListItem(listItemIndex)
+                    removeListItem(listItem.id)
                   }
                 })
               }
