@@ -36,18 +36,54 @@ export default function GeneralForm(props: GeneralFormProps) {
         label="Населённый пункт"
         type="text"
         placeholder="Москва"
+        value={ props.meeting.address.city }
+        onInput={e => props.setMeeting(
+          Object.assign(
+            {},
+            props.meeting,
+            { address: Object.assign(
+              {},
+              props.meeting.address,
+              { city: e.target.value }
+            ) }
+          )
+        )}
       />
 
       <ListInput
         label="Улица"
         type="text"
         placeholder="Шипиловская"
+        value={ props.meeting.address.street }
+        onInput={e => props.setMeeting(
+          Object.assign(
+            {},
+            props.meeting,
+            { address: Object.assign(
+              {},
+              props.meeting.address,
+              { street: e.target.value }
+            ) }
+          )
+        )}
       />
 
       <ListInput
         label="Номер дома"
         type="text"
         placeholder="20"
+        value={ props.meeting.address.house }
+        onInput={e => props.setMeeting(
+          Object.assign(
+            {},
+            props.meeting,
+            { address: Object.assign(
+              {},
+              props.meeting.address,
+              { house: e.target.value }
+            ) }
+          )
+        )}
       />
     </List>
 
