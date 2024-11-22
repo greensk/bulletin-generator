@@ -1,9 +1,9 @@
 'use client'
-// Konsta UI components
-import QuestionsList from './QuestionsList'
+
+import Bulletin from './Bulletin'
 
 export default function Home() {
   return (
-    <QuestionsList/>
+    <Bulletin/>
   )
 }

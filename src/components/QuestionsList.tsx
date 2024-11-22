@@ -6,6 +6,7 @@ import {
   Button,
   Fab,
   Navbar,
+  NavbarBackLink,
   Page
 } from 'konsta/react'
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
@@ -13,11 +14,19 @@ import { faPlus } from '@fortawesome/free-solid-svg-icons'
 
 import QueestionsItem from './QuestionsItem'
 
-export default function QuestionsList() {
+type QuestionsListProps = {
+  onBack: () => void
+}
+
+export default function QuestionsList(props: QuestionsListProps) {
   const [ theList, setTheList ] = useState<string[]>(['', '', ''])
   return (
     <Page>
       <Navbar
+        left={
+          <NavbarBackLink text="Назад" onClick={ props.onBack } />
+        }
+    
         title="Повестка дня"
       />
 
