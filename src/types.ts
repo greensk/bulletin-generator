@@ -30,20 +30,7 @@ export type Meeting = {
   address: Address
   initiators: Organization | Array<Person>
   questions: Record<string, string>
-} & (
-  {
-    meetingType: 'public'
-    public: PublicMeeting
-  }
-  |
-  {
-    meetingType: 'distant'
-    distant: DistantMeeting
-  }
-  |
-  {
-    meetingType: 'combined'
-    public: PublicMeeting
-    distant: DistantMeeting
-  }
-)
+  meetingType: MeetingType
+  public: PublicMeeting
+  distant: DistantMeeting
+}

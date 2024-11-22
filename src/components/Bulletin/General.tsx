@@ -16,6 +16,7 @@ import {
   Dispatch,
   SetStateAction
 } from 'react'
+import Public from './General/Public'
 
 type GeneralFormProps = {
   onNext: () => void
@@ -124,6 +125,18 @@ export default function GeneralForm(props: GeneralFormProps) {
         }
       />
     </List>
+
+    {
+      props.meeting.meetingType !== 'distant' ? <>
+        <BlockTitle>
+          Очная часть
+        </BlockTitle>
+        <Public
+          meeting={ props.meeting }
+          setMeeting={ props.setMeeting }
+        />
+      </> : <></>  
+    }
 
     <Block strong outlineIos className="space-y-2">
       <Button

@@ -1,7 +1,7 @@
 'use client'
 
-import QuestionsList from './Bulletin/QuestionsList'
-import GeneralForm from './Bulletin/GeneralForm'
+import Questions from './Bulletin/Questions'
+import General from './Bulletin/General'
 
 import { Meeting } from '../types'
 
@@ -33,7 +33,7 @@ export default function Bulleting() {
   const [currentStep, setCurrentStep] = useState<Step>('general')
   return (
     <div>
-      { currentStep === 'general' ? <GeneralForm
+      { currentStep === 'general' ? <General
         onNext={
           () => {
             setCurrentStep('questions')
@@ -42,7 +42,7 @@ export default function Bulleting() {
         meeting={ meeting }
         setMeeting={ setMeeting }
       /> : <></> }
-      { currentStep === 'questions' ?  <QuestionsList
+      { currentStep === 'questions' ?  <Questions
         onBack={
           () => {
             setCurrentStep('general')

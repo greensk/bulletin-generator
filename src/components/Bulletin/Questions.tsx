@@ -12,7 +12,7 @@ import {
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
 import { faPlus } from '@fortawesome/free-solid-svg-icons'
 
-import QueestionsItem from './QuestionsItem'
+import QueestionsItem from './Questions/QuestionsItem'
 
 type QuestionsListProps = {
   onBack: () => void

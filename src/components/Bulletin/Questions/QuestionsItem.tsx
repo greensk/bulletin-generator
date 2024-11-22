@@ -7,7 +7,7 @@ import {
   ListInput
 } from 'konsta/react'
 
-import AttachFile from './AttachFile'
+import AttachFile from '../AttachFile'
 import QuestionMenu from './QuestionMenu'
 
 export type QuestionProps = {
