@@ -155,7 +155,7 @@ export default function GeneralForm(props: GeneralFormProps) {
       <Button
         onClick={ props.onNext }
       >
-        Перейти к вопросам
+        Далее
       </Button>
     </Block>
   </Page>

@@ -36,30 +36,44 @@ export default function GeneralForm(props: TheProps) {
       }
     />
     <BlockTitle>Инициатор собрания</BlockTitle>
-    <MenuList>
-      <MenuListItem
-        title="Собственники кваритир"
-        active={props.meeting.initiatorType === 'owners'}
-        onClick={() => {
-          props.setMeeting(
-            (meeting) => {
-              return Object.assign({}, meeting, { initiatorType: 'owners' })
-            }
-          )
-        }}
+    <List strongIos insetIos>
+      <ListItem
+        label
+        title="Собственники квартир"
+        media={
+          <Radio
+            component="div"
+            value="public"
+            checked={props.meeting.initiatorType === 'owners'}
+            onChange={() => {
+              props.setMeeting(
+                (meeting) => {
+                  return Object.assign({}, meeting, { initiatorType: 'owners' })
+                }
+              )    
+            }}
+          />
+        }
       />
-      <MenuListItem
+      <ListItem
+        label
         title="Управляющая компания или ТСЖ"
-        active={ props.meeting.initiatorType === 'management' }
-        onClick={() => {
-          props.setMeeting(
-            (meeting) => {
-              return Object.assign({}, meeting, { initiatorType: 'management' })
-            }
-          )
-        }}
+        media={
+          <Radio
+            component="div"
+            value="distant"
+            checked={props.meeting.initiatorType === 'management'}
+            onChange={() => {
+              props.setMeeting(
+                (meeting) => {
+                  return Object.assign({}, meeting, { initiatorType: 'management' })
+                }
+              )
+            }}
+          />
+        }
       />
-    </MenuList>
+    </List>
 
     {
       props.meeting.initiatorType === 'management' ? <>
