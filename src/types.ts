@@ -21,8 +21,8 @@ export type Organization = {
 }
 
 export type DistantMeeting = {
-  startDatetime: string
-  endDatetime: string
+  endDate: string
+  endTime: string
   reception: string
 }
 

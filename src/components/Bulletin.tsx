@@ -25,8 +25,8 @@ export default function Bulleting() {
       time: ''
     },
     distant: {
-      startDatetime: '',
-      endDatetime: '',
+      endDate: '',
+      endTime: '',
       reception: ''
     }  
   })

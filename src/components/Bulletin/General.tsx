@@ -17,6 +17,7 @@ import {
   SetStateAction
 } from 'react'
 import Public from './General/Public'
+import Distant from './General/Distant'
 
 type GeneralFormProps = {
   onNext: () => void
@@ -132,6 +133,18 @@ export default function GeneralForm(props: GeneralFormProps) {
           Очная часть
         </BlockTitle>
         <Public
+          meeting={ props.meeting }
+          setMeeting={ props.setMeeting }
+        />
+      </> : <></>  
+    }
+
+{
+      props.meeting.meetingType !== 'public' ? <>
+        <BlockTitle>
+          Заочная часть
+        </BlockTitle>
+        <Distant
           meeting={ props.meeting }
           setMeeting={ props.setMeeting }
         />
