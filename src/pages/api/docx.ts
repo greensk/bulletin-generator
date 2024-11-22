@@ -9,8 +9,10 @@ import {
   convertMillimetersToTwip
 } from 'docx'
 import { NextApiRequest, NextApiResponse } from 'next'
+import { Meeting } from '@/types'
 
-export const createDocx = async function (questions: string[]): Promise<Buffer | null> {
+export const createDocx = async function (meeting: string): Promise<Buffer | null> {
+  const content = JSON.parse(meeting) as Meeting
   const word = new Document({
     styles: {
       default: {
@@ -61,7 +63,7 @@ export const createDocx = async function (questions: string[]): Promise<Buffer |
                   })
                 ]
               }),
-              ...questions.map((questionItem, questionItemIndex) => {
+              ...Object.values(content.questions).map((questionItem, questionItemIndex) => {
                 return new TableRow({
                   children: [
                     new TableCell({
@@ -96,7 +98,7 @@ export const createDocx = async function (questions: string[]): Promise<Buffer |
 
 export default async function handler(req: NextApiRequest, res: NextApiResponse) {
 
-  const result = await createDocx(req.body['question[]'])
+  const result = await createDocx(req.body['meeting'])
   if (result) {
     res.status(200).setHeader('Content-Type', 'application/vnd.openxmlformats-officedocument.wordprocessingml.document').send(result)
   } else {

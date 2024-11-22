@@ -6,6 +6,7 @@ import General from './Bulletin/General'
 import { Meeting } from '../types'
 
 import { useState } from 'react'
+import { genRandomString } from '@/utils'
 
 type Step = 'general' | 'questions'
 
@@ -17,7 +18,20 @@ export default function Bulleting() {
       house: ''
     },
     initiators: [],
-    questions: {},
+    questions: [
+      {
+        text: '',
+        id: genRandomString()
+      },
+      {
+        text: '',
+        id: genRandomString()
+      },
+      {
+        text: '',
+        id: genRandomString()
+      }
+    ],
     meetingType: 'combined',
     public: {
       place: '',
@@ -48,6 +62,8 @@ export default function Bulleting() {
             setCurrentStep('general')
           }
         }
+        meeting={ meeting }
+        setMeeting={ setMeeting }
       /> : <></> }
     </div>
   )

@@ -26,10 +26,15 @@ export type DistantMeeting = {
   reception: string
 }
 
+export type Question = {
+  text: string
+  id: string
+}
+
 export type Meeting = {
   address: Address
   initiators: Organization | Array<Person>
-  questions: Record<string, string>
+  questions: Array<Question>
   meetingType: MeetingType
   public: PublicMeeting
   distant: DistantMeeting

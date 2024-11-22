@@ -1,6 +1,10 @@
 'use client'
 
-import { useState } from 'react'
+import {
+  useState,
+  Dispatch,
+  SetStateAction
+} from 'react'
 import {
   Block,
   Button,
@@ -11,15 +15,66 @@ import {
 } from 'konsta/react'
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
 import { faPlus } from '@fortawesome/free-solid-svg-icons'
-
+import { Meeting } from '@/types'
+import { genRandomString } from '@/utils'
 import QueestionsItem from './Questions/QuestionsItem'
 
 type QuestionsListProps = {
   onBack: () => void
+  meeting: Meeting
+  setMeeting: Dispatch<SetStateAction<Meeting>>
 }
 
 export default function QuestionsList(props: QuestionsListProps) {
-  const [ theList, setTheList ] = useState<string[]>(['', '', ''])
+  // const [ theList, setTheList ] = useState<string[]>(['', '', ''])
+  const setListItemText = (index: number, text: string) => {
+    props.setMeeting((meeting) => {
+      return Object.assign(
+        {},
+        meeting,
+        {
+          questions: meeting.questions.map((q, i) => {
+            if (i === index) {
+              return {
+                ...q,
+                text
+              }
+            } else {
+              return q
+            }
+          })
+        }
+      )
+    })
+  }
+  const removeListItem = (index: number) => {
+    props.setMeeting((meeting) => {
+      return Object.assign(
+        {},
+        meeting,
+        {
+          questions: meeting.questions.filter((q, i) => i === index)
+        }
+      )
+    })
+  }
+  const addListItem = (text = '') => {
+    props.setMeeting((meeting) => {
+      return Object.assign(
+        {},
+        meeting,
+        {
+          questions: [
+            ...meeting.questions,
+            {
+              id: genRandomString(),
+              text
+            }
+          ]
+        }
+      )
+    })
+  }
   return (
     <Page>
       <Navbar
@@ -32,17 +87,17 @@ export default function QuestionsList(props: QuestionsListProps) {
 
       <div className="relative pb-12 sm:w-192 mx-auto">
         {
-          theList.map((listItem, listItemIndex) => {
+          props.meeting.questions.map((listItem, listItemIndex) => {
             return <div key={ listItemIndex }>
               {
                 QueestionsItem({
                   number: listItemIndex + 1,
-                  content: listItem,
+                  content: listItem.text,
                   onSetContent: (content: string) => {
-                    setTheList(theList.map((i, index) => index === listItemIndex ? content: i))
+                    setListItemText(listItemIndex, content)
                   },
                   onDelete: () => {
-                    setTheList(theList.filter((_, index) => index !== listItemIndex))
+                    removeListItem(listItemIndex)
                   }
                 })
               }
@@ -56,22 +111,17 @@ export default function QuestionsList(props: QuestionsListProps) {
           textPosition="after"
           touchRipple={ true }
           onClick={() => {
-            setTheList([...theList, ''])
+            addListItem()
           }}
         />
       </div>
       <Block strong outlineIos className="space-y-2">
         <form method="post" action="/api/docx">
-          {
-            theList.map((listItem, listItemIndex) => {
-              return <input
-                key={ listItemIndex }
-                type="hidden"
-                name="question[]"
-                value={ listItem }
-              />
-            })
-          }
+          <input
+            type="hidden"
+            name="meeting"
+            value={ JSON.stringify(props.meeting) }
+          />
           <Button
           >
             Сгенерировать бюллетень
