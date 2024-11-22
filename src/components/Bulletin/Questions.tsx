@@ -16,7 +16,7 @@ import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
 import { faPlus } from '@fortawesome/free-solid-svg-icons'
 import { Meeting } from '@/types'
 import { genRandomString } from '@/utils'
-import QueestionsItem from './Questions/QuestionsItem'
+import QuestionsItem from './Questions/QuestionsItem'
 
 type QuestionsListProps = {
   onBack: () => void
@@ -79,7 +79,6 @@ export default function QuestionsList(props: QuestionsListProps) {
         left={
           <NavbarBackLink text="Назад" onClick={ props.onBack } />
         }
-    
         title="Повестка дня"
       />
 
@@ -88,7 +87,7 @@ export default function QuestionsList(props: QuestionsListProps) {
           props.meeting.questions.map((listItem, listItemIndex) => {
             return <div key={ listItemIndex }>
               {
-                QueestionsItem({
+                QuestionsItem({
                   number: listItemIndex + 1,
                   content: listItem.text,
                   onSetContent: (content: string) => {

@@ -7,22 +7,22 @@ import {
   List,
   ListInput,
   ListItem,
-  Navbar,
-  Page,
-  Radio,
   MenuList,
-  MenuListItem
+  MenuListItem,
+  Navbar,
+  NavbarBackLink,
+  Page,
+  Radio
 } from 'konsta/react'
 import { Meeting } from '@/types'
 import {
   Dispatch,
   SetStateAction
 } from 'react'
-import Public from './General/Public'
-import Distant from './General/Distant'
 
 type TheProps = {
   onNext: () => void
+  onBack: () => void
   meeting: Meeting
   setMeeting: Dispatch<SetStateAction<Meeting>>
 }
@@ -31,6 +31,9 @@ export default function GeneralForm(props: TheProps) {
   return <Page>
     <Navbar
       title="Общее собрание собственников"
+      left={
+        <NavbarBackLink text="Назад" onClick={ props.onBack } />
+      }
     />
     <BlockTitle>Инициатор собрания</BlockTitle>
     <MenuList>
@@ -58,68 +61,37 @@ export default function GeneralForm(props: TheProps) {
       />
     </MenuList>
 
-    <BlockTitle>Сведения об инициаторе</BlockTitle>
-    <List strongIos insetIos>
-      <ListItem
-        label
-        title="Очное"
-        media={
-          <Radio
-            component="div"
-            value="public"
-            checked={props.meeting.meetingType === 'public'}
-            onChange={() => props.setMeeting( Object.assign({}, props.meeting, { meetingType: 'public' }) )}
-          />
-        }
-      />
-      <ListItem
-        label
-        title="Заочное"
-        media={
-          <Radio
-            component="div"
-            value="distant"
-            checked={props.meeting.meetingType === 'distant'}
-            onChange={() => props.setMeeting( Object.assign({}, props.meeting, { meetingType: 'distant' }) )}
-          />
-        }
-      />
-      <ListItem
-        label
-        title="Очно-заочное"
-        media={
-          <Radio
-            component="div"
-            value="combined"
-            checked={props.meeting.meetingType === 'combined'}
-            onChange={() => props.setMeeting( Object.assign({}, props.meeting, { meetingType: 'combined' }) )}
-          />
-        }
-      />
-    </List>
-
     {
-      props.meeting.meetingType !== 'distant' ? <>
-        <BlockTitle>
-          Очная часть
-        </BlockTitle>
-        <Public
-          meeting={ props.meeting }
-          setMeeting={ props.setMeeting }
-        />
-      </> : <></>  
-    }
-
-    {
-      props.meeting.meetingType !== 'public' ? <>
-        <BlockTitle>
-          Заочная часть
-        </BlockTitle>
-        <Distant
-          meeting={ props.meeting }
-          setMeeting={ props.setMeeting }
-        />
-      </> : <></>  
+      props.meeting.initiatorType === 'management' ? <>
+        <BlockTitle>Сведения об инициаторе</BlockTitle>
+        <Block
+        >
+          <List>
+            <ListInput
+              placeholder="Название организации"
+              type="text"
+              value={ props.meeting.initiatorOrganization.name }
+              onInput={(e) => {
+                props.setMeeting((meeting) => {
+                  return Object.assign(
+                    {},
+                    meeting,
+                    {
+                      initiatorOrganization: Object.assign(
+                        {},
+                        props.meeting.initiatorOrganization,
+                        {
+                          name: e.target.value
+                        }
+                      )
+                    }
+                  )
+                })
+              }}
+            />
+          </List>
+        </Block>
+      </> : <></>
     }
 
     <Block strong outlineIos className="space-y-2">

@@ -2,13 +2,14 @@
 
 import Questions from './Bulletin/Questions'
 import General from './Bulletin/General'
+import Initiator from './Bulletin/Initiator'
 
 import { Meeting } from '../types'
 
 import { useState } from 'react'
 import { genRandomString } from '@/utils'
 
-type Step = 'general' | 'questions'
+type Step = 'general' | 'initiator' | 'questions'
 
 export default function Bulleting() {
   const [meeting, setMeeting] = useState<Meeting>({
@@ -59,6 +60,20 @@ export default function Bulleting() {
       { currentStep === 'general' ? <General
         onNext={
           () => {
+            setCurrentStep('initiator')
+          }
+        }
+        meeting={ meeting }
+        setMeeting={ setMeeting }
+      /> : <></> }
+      { currentStep === 'initiator' ? <Initiator
+        onBack={
+          () => {
+            setCurrentStep('general')
+          }
+        }
+        onNext={
+          () => {
             setCurrentStep('questions')
           }
         }
@@ -68,7 +83,7 @@ export default function Bulleting() {
       { currentStep === 'questions' ?  <Questions
         onBack={
           () => {
-            setCurrentStep('general')
+            setCurrentStep('initiator')
           }
         }
         meeting={ meeting }
