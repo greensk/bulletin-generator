@@ -7,8 +7,6 @@ import {
   List,
   ListInput,
   ListItem,
-  MenuList,
-  MenuListItem,
   Navbar,
   NavbarBackLink,
   Page,
@@ -19,6 +17,7 @@ import {
   Dispatch,
   SetStateAction
 } from 'react'
+import InitiatorOwners from './Initiator/InitiatorOwners'
 
 type TheProps = {
   onNext: () => void
@@ -105,6 +104,16 @@ export default function GeneralForm(props: TheProps) {
             />
           </List>
         </Block>
+      </> : <></>
+    }
+
+    {
+      props.meeting.initiatorType === 'owners' ? <>
+        <BlockTitle>Сведения об инициаторе</BlockTitle>
+        <InitiatorOwners
+          meeting={ props.meeting }
+          setMeeting={ props.setMeeting }
+        />
       </> : <></>
     }
 
