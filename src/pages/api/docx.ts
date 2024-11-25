@@ -26,7 +26,7 @@ export const createDocx = async function (meeting: string): Promise<Buffer | nul
             {
               level: 0,
               format: LevelFormat.BULLET,
-              text: "\u1F60",
+              text: '\u1F60',
               alignment: AlignmentType.LEFT,
               style: {
                 paragraph: {
