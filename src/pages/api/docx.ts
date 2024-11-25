@@ -14,6 +14,7 @@ import {
 } from 'docx'
 import { NextApiRequest, NextApiResponse } from 'next'
 import { Meeting } from '@/types'
+import { beautifyDate } from '@/utils'
 
 export const createDocx = async function (meeting: string): Promise<Buffer | null> {
   const content = JSON.parse(meeting) as Meeting
@@ -84,7 +85,7 @@ export const createDocx = async function (meeting: string): Promise<Buffer | nul
           }) : []),
           ...(content.meetingType !== 'distant' ? [
             new Paragraph({
-              text: `Очная часть: ${content.public.place}, ${content.public.date} ${content.public.time}`
+              text: `Очная часть: ${content.public.place}, ${beautifyDate(content.public.date)} ${content.public.time}`
             })
           ] : []),
           ...(content.meetingType !== 'public' ? [
@@ -92,7 +93,7 @@ export const createDocx = async function (meeting: string): Promise<Buffer | nul
               text: `Заполненные бюллетени принимаются: ${content.distant.reception}`
             }),
             new Paragraph({
-              text: `Окончание приёма: ${content.distant.endDate} ${content.distant.endTime}`
+              text: `Окончание приёма: ${beautifyDate(content.distant.endDate)} ${content.distant.endTime}`
             })
           ] : []),
           new Table({
