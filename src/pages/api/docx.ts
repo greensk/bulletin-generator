@@ -1,13 +1,16 @@
 import {
+  AlignmentType,
   Document,
+  HeadingLevel,
+  LevelFormat,
   Packer,
   Paragraph,
   Table,
   TableCell,
   TableRow,
   WidthType,
-  convertMillimetersToTwip,
-  HeadingLevel
+  convertInchesToTwip,
+  convertMillimetersToTwip
 } from 'docx'
 import { NextApiRequest, NextApiResponse } from 'next'
 import { Meeting } from '@/types'
@@ -15,6 +18,29 @@ import { Meeting } from '@/types'
 export const createDocx = async function (meeting: string): Promise<Buffer | null> {
   const content = JSON.parse(meeting) as Meeting
   const word = new Document({
+    numbering: {
+      config: [
+        {
+          reference: 'bullet-points',
+          levels: [
+            {
+              level: 0,
+              format: LevelFormat.BULLET,
+              text: "\u1F60",
+              alignment: AlignmentType.LEFT,
+              style: {
+                paragraph: {
+                  indent: {
+                    left: convertInchesToTwip(0.5),
+                    hanging: convertInchesToTwip(0.25)
+                  }
+                }
+              }
+            }
+          ]
+        }
+      ]
+    },
     styles: {
       default: {
         document: {
@@ -41,6 +67,18 @@ export const createDocx = async function (meeting: string): Promise<Buffer | nul
             text: 'Решение собственника помещения №___ по вопросам, поставленным на голосование на общем собрании собственников',
             heading: HeadingLevel.HEADING_1
           }),
+          new Paragraph({
+            text: 'Собрание проводится по инициативе ' + (content.initiatorType === 'management' ? content.initiatorOrganization.name : 'собственников помещений:'),
+          }),
+          ...(content.initiatorType === 'owners' ? content.initiatorOwners.map((owner) => {
+            return new Paragraph({
+              text: `${owner.fullName} (пом. №${owner.flat})`,
+              numbering: {
+                reference: 'bullet-points',
+                level: 0
+              }
+            })
+          }) : []),
           new Table({
             width: {
               size: 100,

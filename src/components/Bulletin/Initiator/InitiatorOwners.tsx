@@ -18,17 +18,37 @@ type QuestionsListProps = {
 }
 
 export default function QuestionsList(props: QuestionsListProps) {
-  const setOwnerName = (index: number, name: string) => {
+  const setOwnerName = (index: number, fullName: string) => {
     props.setMeeting((meeting) => {
       return Object.assign(
         {},
         meeting,
         {
-          initatorPersions: meeting.initiatorOwners.map((q, i) => {
+          initiatorOwners: meeting.initiatorOwners.map((q, i) => {
             if (i === index) {
               return {
                 ...q,
-                name
+                fullName
+              }
+            } else {
+              return q
+            }
+          })
+        }
+      )
+    })
+  }
+  const setFlat = (index: number, flat: string) => {
+    props.setMeeting((meeting) => {
+      return Object.assign(
+        {},
+        meeting,
+        {
+          initiatorOwners: meeting.initiatorOwners.map((q, i) => {
+            if (i === index) {
+              return {
+                ...q,
+                flat
               }
             } else {
               return q
@@ -76,7 +96,7 @@ export default function QuestionsList(props: QuestionsListProps) {
           fullName={ owner.fullName }
           flat={ owner.flat }
           setFullName={ (fullName: string) => setOwnerName(ownerIndex, fullName) }
-          setFlat={ (flat: string) => setOwnerName(ownerIndex, flat) }
+          setFlat={ (flat: string) => setFlat(ownerIndex, flat) }
           onDelete={ () => removeOwner(ownerIndex) }
         />
       })
