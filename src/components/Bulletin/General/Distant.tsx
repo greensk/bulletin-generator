@@ -21,7 +21,7 @@ export default function GeneralForm(props: Props) {
       label="Место сбора заполненных бюллетеней"
       type="text"
       placeholder="Квартира №99"
-      value={ props.meeting.public.place }
+      value={ props.meeting.distant.reception }
       onInput={e => props.setMeeting(
         Object.assign(
           {},
@@ -29,7 +29,7 @@ export default function GeneralForm(props: Props) {
           { distant: Object.assign(
             {},
             props.meeting.distant,
-            { place: e.target.value }
+            { reception: e.target.value }
           ) }
         )
       )}
@@ -65,7 +65,7 @@ export default function GeneralForm(props: Props) {
           { distant: Object.assign(
             {},
             props.meeting.distant,
-            { time: e.target.value }
+            { endTime: e.target.value }
           ) }
         )
       )}

@@ -26,7 +26,7 @@ export const createDocx = async function (meeting: string): Promise<Buffer | nul
             {
               level: 0,
               format: LevelFormat.BULLET,
-              text: '\u1F60',
+              text: '•',
               alignment: AlignmentType.LEFT,
               style: {
                 paragraph: {
@@ -68,6 +68,9 @@ export const createDocx = async function (meeting: string): Promise<Buffer | nul
             heading: HeadingLevel.HEADING_1
           }),
           new Paragraph({
+            text: `Адрес многоквартирного дома: ${content.address.city}, ул. ${content.address.street}, дом ${content.address.house}`,
+          }),
+          new Paragraph({
             text: 'Собрание проводится по инициативе ' + (content.initiatorType === 'management' ? content.initiatorOrganization.name : 'собственников помещений:'),
           }),
           ...(content.initiatorType === 'owners' ? content.initiatorOwners.map((owner) => {
@@ -79,6 +82,19 @@ export const createDocx = async function (meeting: string): Promise<Buffer | nul
               }
             })
           }) : []),
+          ...(content.meetingType !== 'distant' ? [
+            new Paragraph({
+              text: `Очная часть: ${content.public.place}, ${content.public.date} ${content.public.time}`
+            })
+          ] : []),
+          ...(content.meetingType !== 'public' ? [
+            new Paragraph({
+              text: `Заполненные бюллетени принимаются: ${content.distant.reception}`
+            }),
+            new Paragraph({
+              text: `Окончание приёма: ${content.distant.endDate} ${content.distant.endTime}`
+            })
+          ] : []),
           new Table({
             width: {
               size: 100,
