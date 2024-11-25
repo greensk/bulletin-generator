@@ -1,0 +1,36 @@
+name: bulletin
+
+services:
+  nodeapp:
+    image: node:20.18.1
+    ports:
+      - 3000:3000
+    working_dir: /var/www
+    command: "npm run dev"
+    volumes:
+      - ./:/var/www
+    healthcheck:
+      test: "wget -w 1 --tries=1 http://localhost:3000 -O /dev/null"
+      interval: 2s
+      timeout: 2s
+      retries: 100
+      start_period: 10s
+
+  db:
+    image: couchdb:3.4.2
+    ports:
+      - 127.0.0.1:5984:5984
+    environment:
+      COUCHDB_USER: bulletin
+      COUCHDB_PASSWORD: johie3Aem2gohnieYeer
+    healthcheck:
+      test: "wget -w 1 --tries=1 http://localhost:5984 -O /dev/null"
+      interval: 2s
+      timeout: 2s
+      retries: 100
+      start_period: 10s
+
+  unoserver:
+    image: philiplehmann/unoserver:2.1-1151
+    environment:
+      PORT: 80
