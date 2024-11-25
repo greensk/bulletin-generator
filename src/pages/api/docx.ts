@@ -6,7 +6,8 @@ import {
   TableCell,
   TableRow,
   WidthType,
-  convertMillimetersToTwip
+  convertMillimetersToTwip,
+  HeadingLevel
 } from 'docx'
 import { NextApiRequest, NextApiResponse } from 'next'
 import { Meeting } from '@/types'
@@ -36,6 +37,53 @@ export const createDocx = async function (meeting: string): Promise<Buffer | nul
           }
         },
         children: [
+          new Paragraph({
+            text: 'Решение собственника помещения №___ по вопросам, поставленным на голосование на общем собрании собственников',
+            heading: HeadingLevel.HEADING_1
+          }),
+          new Table({
+            width: {
+              size: 100,
+              type: WidthType.PERCENTAGE
+            },
+            columnWidths: [50, 50],
+            rows: [
+              new TableRow({
+                children: [
+                  new TableCell({
+                    children: [new Paragraph('Номер квартиры (помещения)')]
+                  }),
+                  new TableCell({
+                    children: [new Paragraph('')]
+                  }),
+                ]
+              }),
+              new TableRow({
+                children: [
+                  new TableCell({
+                    children: [new Paragraph('Фамилия, имя, отчество собственника')]
+                  }),
+                  new TableCell({
+                    children: [new Paragraph('')]
+                  }),
+                ]
+              }),
+              new TableRow({
+                children: [
+                  new TableCell({
+                    children: [new Paragraph('Реквизиты домента, подтверждающего право собственности')]
+                  }),
+                  new TableCell({
+                    children: [new Paragraph('')]
+                  }),
+                ]
+              })
+            ]
+          }),
+          new Paragraph({
+            text: 'Решения по вопросам повестки дня',
+            heading: HeadingLevel.HEADING_2
+          }),
           new Table({
             width: {
               size: 100,
