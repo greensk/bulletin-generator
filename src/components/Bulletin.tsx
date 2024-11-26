@@ -11,7 +11,7 @@ import { genRandomString } from '@/utils'
 
 type Step = 'general' | 'initiator' | 'questions'
 
-export default function Bulleting() {
+export default function Bulletin(id: string) {
   const [meeting, setMeeting] = useState<Meeting>({
     address: {
       city: '',

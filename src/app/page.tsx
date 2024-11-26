@@ -1,9 +1,8 @@
-import Home from '@/components/Home'
+import { createBulletin } from '../actions'
 
-export default function Page() {
+export default async function Home() {
+  const theNewId = await createBulletin()
   return (
-    <div>
-      <Home></Home>
-    </div>
+    <div>{ theNewId }</div>
   )
 }

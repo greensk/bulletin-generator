@@ -29,6 +29,9 @@ services:
       timeout: 2s
       retries: 100
       start_period: 10s
+    volumes:
+      - "./data/couchdb:/opt/couchdb/data"
+
 
   unoserver:
     image: philiplehmann/unoserver:2.1-1151
