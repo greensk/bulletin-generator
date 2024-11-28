@@ -11,7 +11,13 @@ import { genRandomString } from '@/utils'
 
 type Step = 'general' | 'initiator' | 'questions'
 
-export default function Bulletin(id: string) {
+type TheProps = {
+  meeting: Meeting
+  setMeeting: (content: Meeting) => void
+}
+
+function Bulletin({ meeting, setMeeting }: TheProps) {
+  /*
   const [meeting, setMeeting] = useState<Meeting>({
     address: {
       city: '',
@@ -54,6 +60,7 @@ export default function Bulletin(id: string) {
       reception: ''
     }  
   })
+  */
   const [currentStep, setCurrentStep] = useState<Step>('general')
   return (
     <div>
@@ -92,3 +99,4 @@ export default function Bulletin(id: string) {
     </div>
   )
 }
+export default Bulletin

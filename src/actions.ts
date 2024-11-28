@@ -56,3 +56,13 @@ export const createBulletin = async (): Promise<string> => {
   return id
 }
 
+export const getMeeting = async (id: string): Promise<Meeting> => {
+  const meeting = db().use<Meeting>('meeting')
+  console.log(`ID: ${id}`)
+  return await meeting.get(id)
+}
+
+export const updateMeeting = async (id: string, meetingData: Meeting): Promise<void> => {
+  const meeting = db().use<Meeting>('meeting')
+  await meeting.insert({ ...meetingData, _rev: undefined }, id)
+}

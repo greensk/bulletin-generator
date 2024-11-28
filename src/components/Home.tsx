@@ -2,6 +2,7 @@ import Bulletin from './Bulletin'
 import { genRandomString } from '@/utils'
 import { createBulletin } from '../actions'
 import { GetServerSideProps, InferGetServerSidePropsType } from 'next'
+import { redirect } from 'next/navigation'
 
 export const getServerSideProps = (async () => {
   const theNewId = await createBulletin()
@@ -15,8 +16,5 @@ export default async function Home(
   }: InferGetServerSidePropsType<typeof getServerSideProps>
 ) {
 
-  
-  return (
-    <div>{ theNewId }</div>
-  )
+  return redirect(`/edit/${theNewId}`)
 }
