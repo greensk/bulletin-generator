@@ -64,5 +64,6 @@ export const getMeeting = async (id: string): Promise<Meeting> => {
 
 export const updateMeeting = async (id: string, meetingData: Meeting): Promise<void> => {
   const meeting = db().use<Meeting>('meeting')
-  await meeting.insert({ ...meetingData, _rev: undefined }, id)
+  const { _rev } = await meeting.get(id)
+  await meeting.insert({ ...meetingData, _rev }, id)
 }

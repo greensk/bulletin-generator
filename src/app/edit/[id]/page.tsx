@@ -6,11 +6,12 @@ type TheParams = {
   id: string
 }
 
-export default async function Page({ params }: { params: TheParams }) {
-  const meeting = await getMeeting(params.id)
+export default async function Page({ params }: { params: Promise<TheParams> }) {
+  const id = (await params).id
+  const meeting = await getMeeting(id)
   const setMeeting = async (content: Meeting) => {
     'use server'
-    updateMeeting(params.id, content)
+    updateMeeting(id, content)
   }
   return (<Bulletin
     meeting={ meeting }

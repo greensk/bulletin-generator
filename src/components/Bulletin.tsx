@@ -6,8 +6,7 @@ import Initiator from './Bulletin/Initiator'
 
 import { Meeting } from '../types'
 
-import { useState } from 'react'
-import { genRandomString } from '@/utils'
+import { useState, SetStateAction } from 'react'
 
 type Step = 'general' | 'initiator' | 'questions'
 
@@ -16,52 +15,13 @@ type TheProps = {
   setMeeting: (content: Meeting) => void
 }
 
-function Bulletin({ meeting, setMeeting }: TheProps) {
-  /*
-  const [meeting, setMeeting] = useState<Meeting>({
-    address: {
-      city: '',
-      street: '',
-      house: ''
-    },
-    initiatorType: 'owners',
-    initiatorOrganization: {
-      name: ''
-    },
-    initiatorOwners: [
-      {
-        fullName: '',
-        flat: ''
-      }
-    ],
-    questions: [
-      {
-        text: '',
-        id: genRandomString()
-      },
-      {
-        text: '',
-        id: genRandomString()
-      },
-      {
-        text: '',
-        id: genRandomString()
-      }
-    ],
-    meetingType: 'combined',
-    public: {
-      place: '',
-      date: '',
-      time: ''
-    },
-    distant: {
-      endDate: '',
-      endTime: '',
-      reception: ''
-    }  
-  })
-  */
+function Bulletin(props: TheProps) {
   const [currentStep, setCurrentStep] = useState<Step>('general')
+  const [meeting, setMeeting] = useState<Meeting>(props.meeting)
+  const updateMeeting = (content: SetStateAction<Meeting>) => {
+    setMeeting(content)
+    props.setMeeting(meeting)
+  }
   return (
     <div>
       { currentStep === 'general' ? <General
@@ -71,7 +31,7 @@ function Bulletin({ meeting, setMeeting }: TheProps) {
           }
         }
         meeting={ meeting }
-        setMeeting={ setMeeting }
+        setMeeting={ updateMeeting }
       /> : <></> }
       { currentStep === 'initiator' ? <Initiator
         onBack={
@@ -85,7 +45,7 @@ function Bulletin({ meeting, setMeeting }: TheProps) {
           }
         }
         meeting={ meeting }
-        setMeeting={ setMeeting }
+        setMeeting={ updateMeeting }
       /> : <></> }
       { currentStep === 'questions' ?  <Questions
         onBack={
@@ -94,7 +54,7 @@ function Bulletin({ meeting, setMeeting }: TheProps) {
           }
         }
         meeting={ meeting }
-        setMeeting={ setMeeting }
+        setMeeting={ updateMeeting }
       /> : <></> }
     </div>
   )
