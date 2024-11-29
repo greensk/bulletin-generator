@@ -13,8 +13,9 @@ import { useState, SetStateAction, useCallback } from 'react'
 type Step = 'general' | 'initiator' | 'questions'
 
 type TheProps = {
-  meeting: Meeting
-  setMeeting: (content: Meeting) => void
+  meeting: Meeting;
+  setMeeting: (content: Meeting) => void;
+  attachFile: (fileName: string, fileContentType: string, fileContent: ArrayBuffer) => Promise<void>;
 }
 
 function Bulletin(props: TheProps) {
@@ -32,6 +33,7 @@ function Bulletin(props: TheProps) {
     setMeeting(content)
     debouncedUpdate(meeting)
   }
+  
   return (
     <div>
       { currentStep === 'general' ? <General
@@ -65,6 +67,7 @@ function Bulletin(props: TheProps) {
         }
         meeting={ meeting }
         setMeeting={ updateMeeting }
+        attachFile={ props.attachFile }
       /> : <></> }
     </div>
   )

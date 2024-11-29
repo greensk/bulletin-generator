@@ -67,3 +67,9 @@ export const updateMeeting = async (id: string, meetingData: Meeting): Promise<v
   const { _rev } = await meeting.get(id)
   await meeting.insert({ ...meetingData, _rev }, id)
 }
+
+export const attachFile = async (meetingId: string, fileName: string, fileContentType: string, fileContent: ArrayBuffer): Promise<void> => {
+  const meeting = db().use<Meeting>('meeting')
+  const { _rev } = await meeting.get(meetingId)
+  await meeting.attachment.insert(meetingId, fileName, fileContent, fileContentType, { rev: _rev })
+}

@@ -22,6 +22,7 @@ type QuestionsListProps = {
   onBack: () => void
   meeting: Meeting
   setMeeting: Dispatch<SetStateAction<Meeting>>
+  attachFile: (fileName: string, fileContentType: string, fileContent: ArrayBuffer) => Promise<void>
 }
 
 export default function QuestionsList(props: QuestionsListProps) {
@@ -95,6 +96,9 @@ export default function QuestionsList(props: QuestionsListProps) {
                   },
                   onDelete: () => {
                     removeListItem(listItem.id)
+                  },
+                  onFileAttach: async (file, contentType, content) => {
+                    return props.attachFile(file, contentType, content)
                   }
                 })
               }

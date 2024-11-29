@@ -15,6 +15,7 @@ export type QuestionProps = {
   number: number
   onDelete: () => void
   onSetContent: (content: string) => void
+  onFileAttach: (name: string, contentType: string, content: ArrayBuffer) => Promise<void>
 }
 
 export default function QuestionItem(props: QuestionProps) {
@@ -46,6 +47,7 @@ export default function QuestionItem(props: QuestionProps) {
         />
         <AttachFile
           className="z-30"
+          onFileAttach={ props.onFileAttach }
         />
       </List>
     </Block>
