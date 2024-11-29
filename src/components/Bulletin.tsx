@@ -4,9 +4,11 @@ import Questions from './Bulletin/Questions'
 import General from './Bulletin/General'
 import Initiator from './Bulletin/Initiator'
 
+import debounce from 'debounce'
+
 import { Meeting } from '../types'
 
-import { useState, SetStateAction } from 'react'
+import { useState, SetStateAction, useCallback } from 'react'
 
 type Step = 'general' | 'initiator' | 'questions'
 
@@ -18,9 +20,17 @@ type TheProps = {
 function Bulletin(props: TheProps) {
   const [currentStep, setCurrentStep] = useState<Step>('general')
   const [meeting, setMeeting] = useState<Meeting>(props.meeting)
+
+  const debouncedUpdate = useCallback(
+    debounce((meeting: Meeting) => {
+      props.setMeeting(meeting)
+    }, 1000),
+    []
+  )
+
   const updateMeeting = (content: SetStateAction<Meeting>) => {
     setMeeting(content)
-    props.setMeeting(meeting)
+    debouncedUpdate(meeting)
   }
   return (
     <div>
